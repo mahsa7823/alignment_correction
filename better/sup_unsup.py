@@ -1,9 +1,14 @@
 import csv
 import json
+import sys
 import pandas as pd
 
-unsup_result = open("data/stat.out.train", "r", encoding="utf-8-sig")
-#unsup_result = open("data/stat.out.analysis", "r", encoding="utf-8-sig")
+if sys.argv[1] == 'analysis':
+  unsup_result = open("data/stat.out.analysis", "r", encoding="utf-8-sig")
+  wc_unsup = 1148
+elif sys.argv[1] == 'train':
+  unsup_result = open("data/stat.out.train", "r", encoding="utf-8-sig")
+  wc_unsup=5858
 unsup_reader = csv.DictReader(unsup_result, delimiter=',')
 sup_result = open("sup_span.csv", "r", encoding="utf-8-sig")
 sup_reader = csv.DictReader(sup_result, delimiter=',')
@@ -15,8 +20,6 @@ dict = {'doc_id': [], 'event_id': [], 'ann_type': [], 'ss-id': [], 'source_sent'
 all_unsup = []
 for un in unsup_reader:
   all_unsup.append(un)
-#wc_unsup = 1148
-wc_unsup=5858
 visit_un = dict.fromkeys(range(wc_unsup),0)
 for sup in sup_reader:
   for i, un in enumerate(all_unsup):

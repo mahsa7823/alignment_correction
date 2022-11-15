@@ -1,10 +1,12 @@
 import csv
 import json
+import sys
 import pandas as pd
 
-#csv_result = open("data/analysis-Batch_43_results.csv", "r", encoding="utf-8")
-csv_result = open("data/train-Batch_results.csv", "r", encoding="utf-8")
-#csv_result = open("tmp", "r", encoding="utf-8")
+if sys.argv[1] == 'analysis':
+  csv_result = open("data/analysis-Batch_43_results.csv", "r", encoding="utf-8")
+elif sys.argv[1] == 'train':
+  csv_result = open("data/train-Batch_results.csv", "r", encoding="utf-8")
 reader = csv.DictReader(csv_result, delimiter=',')
 
 dict = {'doc_id': [], 'event_id': [], 'ann_type': [], 'ss-id': [], 'source_sent': [],
