@@ -26,7 +26,11 @@ with open('combine.csv', encoding='utf-8-sig') as csvf:
   n_identical = 0
   n_overlapping = 0
   n_different = 0
+  agreement_stats_by_type = collections.defaultdict(int)
+  disagreement_stats_by_type = collections.defaultdict(int)
+  overlap_stats_by_type = collections.defaultdict(int)
   for row in csvReader:
+   span_type = row['ann_type']
    if row['doc_id']+","+row['ss-id']+","+row['source_span'] not in visited_spans:
     visited_spans.append(row['doc_id']+","+row['ss-id']+","+row['source_span'])
     #print("silver", row['silver_span'])
@@ -46,9 +50,11 @@ with open('combine.csv', encoding='utf-8-sig') as csvf:
       if against == '':
         # identical empty
         n_identical += 1
+        agreement_stats_by_type[span_type] += 1
       else:
         # identical non-empty
         n_identical += 1
+        agreement_stats_by_type[span_type] += 1
     else:
       overlap_st = get_overlap(against, sup).rstrip()
       lg = len(overlap_st)
@@ -56,11 +62,13 @@ with open('combine.csv', encoding='utf-8-sig') as csvf:
         if max(len(against), len(sup))*0.3<=lg:
           # overlapping
           n_overlapping += 1
+          overlap_stats_by_type[span_type] += 1
         else:
           #no overlap
           #if sup != '':
            #if (unsup != '' and sup != ''):
            n_different += 1
+           disagreement_stats_by_type[span_type] += 1
            dict['doc_id'].append(row['doc_id'])
            dict['event_id'].append(row['event_id'])
            dict['ann_type'].append(row['ann_type'])
@@ -81,6 +89,7 @@ with open('combine.csv', encoding='utf-8-sig') as csvf:
       	  #if sup != '':
            #if (unsup != '' and sup != ''):
            n_different += 1
+           disagreement_stats_by_type[span_type] += 1
            dict['doc_id'].append(row['doc_id'])
            dict['event_id'].append(row['event_id'])
            dict['ann_type'].append(row['ann_type'])
@@ -96,7 +105,10 @@ with open('combine.csv', encoding='utf-8-sig') as csvf:
            dict['src_token_start_end'].append(row['src_token_start_end'])
   
   print("Identical", n_identical)
+  print(agreement_stats_by_type)
   print("Overlapping", n_overlapping)
+  print(overlap_stats_by_type)
   print("Different", n_different)
+  print(disagreement_stats_by_type)
 df = pd.DataFrame.from_dict(dict)
 df.to_csv("compare.csv", index=False, header=True, encoding="utf-8-sig")
