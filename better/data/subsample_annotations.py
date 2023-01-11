@@ -24,7 +24,10 @@ def load_data(annotation_file):
 def subsample_data(data, keep_proportion, seed):
   n = len(data)
   n_keep = math.ceil(n * keep_proportion)
+
+  random.seed(seed)
   keep_idx = random.sample(range(n), n_keep)
+
   sample = [d for i, d in enumerate(data) if i in keep_idx]
 
   assert len(sample) == n_keep
