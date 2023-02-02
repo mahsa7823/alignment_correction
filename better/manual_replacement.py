@@ -106,7 +106,7 @@ print("compare_result", dict_from_csv)
 #df = pd.DataFrame.from_dict(row)
 #df.to_csv("compare-manual.csv", index=False, header=True, encoding="utf-8-sig")
 
-myFile = open('demo_file.csv', 'w')
+myFile = open('compare_fixed.csv', 'w')
 writer = csv.writer(myFile)
 writer.writerow(['doc_id','event_id','ann_type','ss-id','source_span','silver_span','sup_span','sup_span_tok','sup_span_start_tok','sup_span_end_tok','sup_span_start','sup_span_end','src_token_start_end'])
 for dictionary in dict_from_csv:
