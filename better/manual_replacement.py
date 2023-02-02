@@ -38,69 +38,50 @@ for row in dict_from_csv:
     row['sup_span'] = "مرده‌ها"
   elif docid == '376bd536-b2b9-5b56-9558-0eafcd4e09e0+4' and ssid == 'ss-2':
     row['sup_span'] = "چهار متهم باقی‌مانده"
-  elif docid == '376bd536-b2b9-5b56-9558-0eafcd4e09e0+5' and ssid == 'ss-3':
-    #row['sup_span'] = 
-    pass
+  elif docid == '376bd536-b2b9-5b56-9558-0eafcd4e09e0+5' and ssid == 'ss-4':
+    row['sup_span'] = "آن‌ها"
   elif docid == '4dac2187-d4c1-5375-b564-daa0cca80192+11' and ssid == 'ss-29':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "ارائه کرده‌است"
+    row['sup_span_start'] = 142
   elif docid == '532cdbf5-856b-5151-b9d9-e50f52271ed4+5' and ssid == 'ss-50':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "جان بیش از ۱۵۰ ٬ ۰۰۰ نفر را گرفت"
   elif docid == '7b4cfd1f-9f1f-5904-bf93-20b3deec2ef8+0' and ssid == 'ss-1':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "مهد کودک‌ها"
   elif docid == '8f89a335-8cfd-59ce-89f8-3a5269dd2c9d+7' and ssid == 'ss-18':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "کنترل می‌کنند"
   elif docid == '8f89a335-8cfd-59ce-89f8-3a5269dd2c9d+8' and ssid == 'ss-39':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "ماسک‌های صورت"
   elif docid == '97bd1bd4-8a41-51e4-9130-d9b20977a37e+7' and ssid == 'ss-13':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "سپیده‌ی طلایی"
   elif docid == '97bd1bd4-8a41-51e4-9130-d9b20977a37e+9' and ssid == 'ss-40':
-    #row['sup_span'] = 
-    pass
-  elif docid == '9ca065ad-c8eb-53b6-a8b3-aea777c53d90+8' and ssid == 'ss-23':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "کاهش یافته‌است"
+  elif docid == '9ca065ad-c8eb-53b6-a8b3-aea777c53d90+8' and ssid == 'ss-24':
+    row['sup_span'] = "خیلی‌ها"
   elif docid == 'a482a16c-47cc-5625-ae6e-a6b0718bd098+2' and ssid == 'ss-19':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "جان خود را از دست داده‌اند"
   elif docid == 'a597d736-3015-53d9-a47d-09ab5187edcc+3' and ssid == 'ss-37':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "می‌خواهند"
   elif docid == 'a9ddc7fe-a59b-5b65-a188-3a6e8cada5d6+10' and ssid == 'ss-20':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "اولین عراقی‌هایی"
   elif docid == 'ab221507-2e5e-5eff-b8c5-3ed5d3c3c71f+4' and ssid == 'ss-2':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "آن‌ها"
   elif docid == 'bca478b9-c71b-5026-b974-d05a13ac4e4c+16' and ssid == 'ss-100':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "تجمع کردند"
+    row['sup_span_start'] = 105
   elif docid == 'bca478b9-c71b-5026-b974-d05a13ac4e4c+16' and ssid == 'ss-56':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "گروه‌های شبه‌نظامی حزب‌الله"
   elif docid == 'c1a951c5-c2c8-5a10-b03d-e9751ec98631+1' and ssid == 'ss-28':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "محمد مورسی رئیس‌جمهور منتخب میانه رو"
   elif docid == 'c1a951c5-c2c8-5a10-b03d-e9751ec98631+8' and ssid == 'ss-18':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "شاخه مصری دولت اسلامی عراق و شام ( داعش )"
   elif docid == 'e5a497bd-7a34-5e7c-910d-8fab2c0cd3bb+8' and ssid == 'ss-5':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "ده‌ها متهم"
   elif docid == 'e6111897-b419-5f66-b95b-2286832670b0+2' and ssid == 'ss-27':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "رخ می‌دهد"
   elif docid == 'eeb788a4-3b63-554a-b05c-c8774bedee61+17' and ssid == 'ss-9':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "روزنامه‌نگارانی"
   elif docid == 'fb88fa3e-b00a-5125-9638-562fe9ee18cc+11' and ssid == 'ss-7':
-    #row['sup_span'] = 
-    pass
+    row['sup_span'] = "هیچ‌کس"
 
 print("compare_result", dict_from_csv)
 #df = pd.DataFrame.from_dict(row)
