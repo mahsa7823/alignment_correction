@@ -4,8 +4,8 @@ import csv
 f_sil = open("data/proj_zh_a-ali-g-txt_test-g/sil.dev.csv")
 #line,src_span_toks,tgt_span_toks,src_span_start,src_span_end,tgt_span_start,tgt_span_end,entity
 
-f_uns = open("csv/r11.unsup.dev.csv")
-f_gol = open("csv/gold.dev.csv")
+f_uns = open("data/csv/r11.unsup.dev.csv")
+f_gol = open("data/csv/gold.dev.csv")
 
 f_sil_reader = csv.reader(f_sil)
 f_uns_reader = csv.reader(f_uns)
