@@ -1,11 +1,11 @@
 import collections
 import csv
 
-f_sil = open("data/gale_en_zh/proj_zh_a-ali-g-txt_test-g/dev/sil.dev.csv")
+f_sil = open("data/proj_zh_a-ali-g-txt_test-g/sil.dev.csv")
 #line,src_span_toks,tgt_span_toks,src_span_start,src_span_end,tgt_span_start,tgt_span_end,entity
 
-f_uns = open("ner_sb/unsup_outputs/r11.unsup.dev.csv")
-f_gol = open("ner_sb/dev.csv")
+f_uns = open("csv/r11.unsup.dev.csv")
+f_gol = open("csv/gold.dev.csv")
 
 f_sil_reader = csv.reader(f_sil)
 f_uns_reader = csv.reader(f_uns)
@@ -40,7 +40,7 @@ def get_overlap(s1, s2):
     overlap = list((multiset_1 & multiset_2).elements())
     return " ".join(overlap)
 
-f_semisup = open("semisup", 'w')
+f_semisup = open("semisup.csv", 'w')
 semisup_writer = csv.writer(f_semisup)
 fieldnames = ["line","src_span_toks","tgt_span_toks","src_span_start","src_span_end","tgt_span_start","tgt_span_end"]
 semisup_writer.writerow(fieldnames)
