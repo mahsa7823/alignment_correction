@@ -1,10 +1,9 @@
 import csv
 
-f_labs_en = open("data/gale_en_zh/orig/train.en.ner")
-f_labs_zh = open("data/gale_en_zh/orig/train.zh.ner")
-f_toks_zh = open("data/gale_en_zh/orig/train.zh")
-f_csv = open("ner_sb/unsup_outputs/r11.unsup.train.csv") # proj_zh_unsup_test-c
-#f_csv = open("semisup") # proj_zh_semisup_test-c
+f_labs_en = open("data/orig/train.en.ner")
+f_labs_zh = open("data/orig/train.zh.ner")
+f_toks_zh = open("data/orig/train.zh")
+f_csv = open("data/csv/r11.unsup.train.csv") # proj_zh_unsup_test-c
 #line,src_span_toks,tgt_span_toks,src_span_start,src_span_end,tgt_span_start,tgt_span_end
 
 f_csv_reader = csv.reader(f_csv)
