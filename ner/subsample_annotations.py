@@ -8,7 +8,8 @@ def parse_args():
   parser.add_argument('--silver', required=True)
   parser.add_argument('--unsup', required=True)
   parser.add_argument('--gold', required=True)
-  parser.add_argument('--keep-proportion', required=True, type=float, help='proportion of data to keep (between 0 and 1)')
+  parser.add_argument('--keep-proportion', type=float, help='proportion of gold data to sample (between 0 and 1)')
+  parser.add_argument('--keep-quantity', type=int, help='number of gold data to sample')
   parser.add_argument('--seeds', required=True, nargs='+', type=int, help='list of seeds')
   
   args = parser.parse_args()
@@ -42,9 +43,12 @@ def get_disagreement_sentence_ids(silver_data, unsup_data):
 
   return disagreement_sentence_ids
 
-def subsample_data(data, keep_proportion, seed):
+def subsample_data(data, keep_proportion, keep_quantity, seed):
   n = len(data)
-  n_keep = math.ceil(n * keep_proportion)
+  if keep_quantity:
+    n_keep = keep_quantity
+  else:
+    n_keep = math.ceil(n * keep_proportion)
 
   random.seed(seed)
   keep_idx = random.sample(range(n), n_keep)
@@ -55,8 +59,8 @@ def subsample_data(data, keep_proportion, seed):
 
   return sample
 
-def generate_file_name(base_file, seed, keep_proportion):
-  return base_file.split('.txt')[0] + f'_keep{keep_proportion}_seed{seed}' + '.txt'
+def generate_file_name(base_file, seed, keep_amount):
+  return base_file.split('.txt')[0] + f'_keep{keep_amount}_seed{seed}' + '.txt'
 
 def write_output(output_file, data):
   sentence_strs = ['-DOCSTART- -X- -X- O'] + ['\n'.join(sentence_data) for sentence_data in data]
@@ -69,6 +73,9 @@ def write_output(output_file, data):
 
 def main():
   args = parse_args()
+  if not args.keep_proportion and not args.keep_quantity:
+    raise ValueError('Must specify one of keep-proportion and keep-quantity')
+
   gold_data = load_data(args.gold)
   silver_data = load_data(args.silver)
   unsup_data = load_data(args.unsup)
@@ -80,7 +87,7 @@ def main():
 
   samples = []
   for seed in args.seeds:
-    sample = subsample_data(disagreement_sentence_ids, args.keep_proportion, seed)
+    sample = subsample_data(disagreement_sentence_ids, args.keep_proportion, args.keep_quantity, seed)
     samples.append(sample)
 
   # For each disagreement sentence id, overwrite that sentence's annotations in the silver data with the values from the gold data
@@ -96,7 +103,8 @@ def main():
 
   # Write out modified data to file
   for seed, output in zip(args.seeds, outputs):
-    outfile = generate_file_name(args.gold, seed, args.keep_proportion)
+    keep_amount = args.keep_proportion or args.keep_quantity
+    outfile = generate_file_name(args.gold, seed, keep_amount)
     write_output(outfile, output)
 
 if __name__ == "__main__":
