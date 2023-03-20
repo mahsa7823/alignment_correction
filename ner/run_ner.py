@@ -232,6 +232,10 @@ def main():
                         help="The output directory where the model predictions and checkpoints will be written.")
 
     ## Other parameters
+    parser.add_argument("--pretrained_checkpoint_dir",
+                        default="",
+                        type=str,
+                        help="Directory containing a pretrained model that is to be finetuned.")
     parser.add_argument("--cache_dir",
                         default="",
                         type=str,
@@ -365,17 +369,24 @@ def main():
     
     # Prepare model
     cache_dir = args.cache_dir if args.cache_dir else os.path.join(str(PYTORCH_PRETRAINED_BERT_CACHE), 'distributed_{}'.format(args.local_rank))
-    if not args.resume:
+    if not args.resume and not args.pretrained_checkpoint_dir:
         model = BertForTokenClassification.from_pretrained(args.bert_model,
                   cache_dir=cache_dir,
                   num_labels = num_labels)
-    else:
+    elif args.resume:
         logger.info("Resume training from pre-trained model found at {}".format(args.output_dir))
         output_config_file = os.path.join(args.output_dir, CONFIG_NAME)
         output_model_file = os.path.join(args.output_dir, WEIGHTS_NAME)
         config = BertConfig(output_config_file)
         model = BertForTokenClassification(config, num_labels=num_labels)
         model.load_state_dict(torch.load(output_model_file))
+    elif args.pretrained_checkpoint_dir:
+        logger.info("Finetune pre-trained model found at {}".format(args.pretrained_checkpoint_dir))
+        pretrained_config_file = os.path.join(args.pretrained_checkpoint_dir, CONFIG_NAME)
+        pretrained_model_file = os.path.join(args.pretrained_checkpoint_dir, WEIGHTS_NAME)
+        config = BertConfig(pretrained_config_file)
+        model = BertForTokenClassification(config, num_labels=num_labels)
+        model.load_state_dict(torch.load(pretrained_model_file))
 
     if args.fp16:
         model.half()
